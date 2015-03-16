@@ -26,8 +26,10 @@ namespace OOP2CreditUnion
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            //Deleting user
             if (MessageBox.Show("Are you sure you wish to Delete User, This cannnot be undone?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                //Calling userBLL method userToDelete
                 string userToDelete = cboUserNames.SelectedItem.ToString();
                 if (userBLL.RemoveUser(userToDelete))
                 {

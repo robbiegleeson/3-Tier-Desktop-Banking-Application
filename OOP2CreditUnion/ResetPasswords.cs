@@ -29,6 +29,7 @@ namespace OOP2CreditUnion
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            //Reset user password
             if (MessageBox.Show("Are you sure you want to reset " + cboUserNames.SelectedItem.ToString() +"'s password?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (userBLL.ResetPassword(SessionUser, cboUserNames.SelectedItem.ToString()))
@@ -40,6 +41,7 @@ namespace OOP2CreditUnion
 
         private void ResetPasswords_Load(object sender, EventArgs e)
         {
+            //Populating combo-box with List of usernames by calling GetUserNames in the BLL.
             List<string> userNames = userBLL.GetUserNames();
             cboUserNames.DataSource = userNames;
         }

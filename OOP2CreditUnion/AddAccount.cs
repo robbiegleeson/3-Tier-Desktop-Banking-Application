@@ -37,13 +37,14 @@ namespace OOP2CreditUnion
             AccountBLLManager accountBll = new AccountBLLManager();
 
             string accType = string.Empty;
-
+            //Hard-code account type
             if (rdoCurrent.Checked)
                 accType = "Current Account";
             if (rdoSavings.Checked)
                 accType = "Savings Account";
 
             Customer newCustomer = new Customer();
+            //Checking that all fields are validated using ValidateFields bool
             if (ValidateFields())
             {
                 newCustomer.FirstName = txtFirstName.Text; //Perform validation here
@@ -56,6 +57,7 @@ namespace OOP2CreditUnion
                 newCustomer.County = cboCounties.SelectedValue.ToString();
                 newCustomer.OnlineCustomer = false;
 
+                //Instantiate Account class for new account
                 Account newAccount = new Account();
 
                 newAccount.AccountType = accType;
@@ -78,6 +80,7 @@ namespace OOP2CreditUnion
         }
         
         bool ValidateFields()
+        //Passing values into Validation class to perform validation of fields
         {
             bool result = true;
             if (!Validation.IsTextFormat(txtFirstName.Text))
@@ -167,6 +170,7 @@ namespace OOP2CreditUnion
 
         private void AddAccount_Load(object sender, EventArgs e)
         {
+            //Loading combo-box with values from Enum
             cboCounties.DataSource = Enum.GetValues(typeof(Counties));
         }
 

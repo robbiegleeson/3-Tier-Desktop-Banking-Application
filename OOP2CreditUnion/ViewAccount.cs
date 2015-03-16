@@ -38,7 +38,7 @@ namespace OOP2CreditUnion
         private void ViewAccount_Load(object sender, EventArgs e)
         {
             SelectDepositFundsTab();
-
+            //On form load, pre-populate controls with selected values
             if (AccountNumber > 0 && CustomerID > 0)
             {
                 currentAccount = accountBLL.GetAccountDetails(AccountNumber);
@@ -87,9 +87,10 @@ namespace OOP2CreditUnion
             Account updateBalance = new Account();
 
             int oldBalance, deposit;
-
+            //Passing amount to deposit into validation to ensure correct format
             if (Validation.IsCurrencyFormat(txtAmountToDeposit.Text))
             {
+                //Assigning values and passing to MakeDeposit method in the BLL
                 oldBalance = accountBLL.FormatCurrency(txtFromBalance.Text);
                 deposit = accountBLL.FormatCurrency(txtAmountToDeposit.Text);
                 updateBalance.Balance = accountBLL.MakeDeposit(oldBalance, deposit);
@@ -99,6 +100,8 @@ namespace OOP2CreditUnion
 
                 try
                 {
+                    //If balance is successfully updated, enter record into TransactionTable by passing 
+                    //following values into method RecordTransaction in the BLL
                     if (accountBLL.UpdateAccountBalance(updateBalance))
                     {
                         try
@@ -160,23 +163,27 @@ namespace OOP2CreditUnion
             Account updateBalance = new Account();
 
             int oldBalance, withdraw, newBalance;
-
+            //Check for validation errors
             if (Validation.IsCurrencyFormat(txtAmountToWithdraw.Text))
             {
+                //Passing values into FormatCurrency method to change format
                 oldBalance = accountBLL.FormatCurrency(txtFromBalance.Text);
                 withdraw = accountBLL.FormatCurrency(txtAmountToWithdraw.Text);
 
+                //Checking if account has sufficient funds to withdraw
                 if (accountBLL.HasSufficientFunds(oldBalance, withdraw, Convert.ToInt32(accountBLL.FormatCurrency(txtOverdraftLimit.Text))))
                 {
                     newBalance = oldBalance - withdraw;
                     updateBalance.AccountNumber = int.Parse(txtFromAccountNumber.Text);
                     updateBalance.Balance = newBalance;
 
+
+                    //If true then pass values into UpdateAccountBalance in the BLL
                     if (accountBLL.UpdateAccountBalance(updateBalance))
                     {
                         try
                         {
-
+                            //And record the transaction in the TransactionTable
                             Transaction newTransaction = new Transaction();
                             TransactionBLLManager transactionBLL = new TransactionBLLManager();
 
@@ -218,7 +225,8 @@ namespace OOP2CreditUnion
             int amount;
             int updateSourceAccBalance;
 
-
+            //If transfer is an external account, ignore searched account balance and just record transaction
+            //and update senders account balance. No updating of external account balance.
             if (cbExternalYes.Checked)
             {               
                 if (accountBLL.ExternalTransfer(fromAccount, toAccount))
@@ -249,14 +257,13 @@ namespace OOP2CreditUnion
                     this.Close(); 
                 }
             }
-
+            //If transfer is internal, validate fields, update sender and reciever account balance and record
+            //transaction in TransactionTable 
             else if (!cbExternalYes.Checked)
             {
                 if (Validation.IsCurrencyFormat(txtFromBalance.Text) && Validation.IsCurrencyFormat(txtAmountToTransfer.Text) && Validation.IsCurrencyFormat(txtAmountToTransfer.Text))
                 {
                     amount = accountBLL.FormatCurrency(txtAmountToTransfer.Text);
-
-
 
                     if (accountBLL.TransferFrom(accountBLL.FormatCurrency(txtFromBalance.Text), amount, out updateSourceAccBalance))
                     {
@@ -312,6 +319,7 @@ namespace OOP2CreditUnion
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            //Searching for internal account in order to pre-populate txtToBalance & txtToAccount Number
             if (Validation.IsNumberFormat(txtSearchAccount.Text))
             {
                 int searchAccountNumber = int.Parse(txtSearchAccount.Text);
@@ -325,9 +333,11 @@ namespace OOP2CreditUnion
                     txtToBalance.Text = queriedAccount.DisplayBalance;
                 }
                 else
+                    //If no account found
                     MessageBox.Show("No Account Found.", "ERROR!");
             }
             else
+                //Invalid account number
                 MessageBox.Show("Please Enter a valid Account Number.", "ERROR!");
         }
 

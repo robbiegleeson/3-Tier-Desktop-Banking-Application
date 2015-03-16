@@ -21,6 +21,7 @@ namespace OOP2CreditUnion
 
         private void ViewUsers_Load(object sender, EventArgs e)
         {
+            //Setting DataGrid data source from BLL GetUserLogs; displays Username, Last Login and Is Admin
             dgvUsers.DataSource = userBLL.GetUserLogs().Tables[0];
         }
 

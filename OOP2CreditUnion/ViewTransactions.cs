@@ -23,6 +23,7 @@ namespace OOP2CreditUnion
         {
             InitializeComponent();
             AccountNumber = accountNumber;
+            //Pre-populating label to display account number
             lblAccount.Text += string.Format(" {0}", accountNumber);
         }
 
@@ -33,6 +34,7 @@ namespace OOP2CreditUnion
 
         private void Transactions_Load(object sender, EventArgs e)
         {
+            //Setting the data source of the data grid to displaya transactions
             transactionBLL = new TransactionBLLManager();
             DataSet ds = transactionBLL.GetDetailsForViewGrid(AccountNumber);
             dgvDisplay.DataSource = ds.Tables[0];

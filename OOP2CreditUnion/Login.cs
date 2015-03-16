@@ -28,6 +28,7 @@ namespace OOP2CreditUnion
         private void btnLogin_Click(object sender, EventArgs e)
         {
             User cUser = new User();
+            //Validating current user using UserLogin method
             loginStatus = UserLogin(cUser);
             userLevel = cUser.IsAdmin;
             userName = txtUsername.Text;
@@ -36,6 +37,7 @@ namespace OOP2CreditUnion
 
         bool UserLogin(User currentUser)
         {
+            //Validating Username in Validation Class using Regex
             if (!Validation.IsTextFormat(txtUsername.Text))
             {
                 MessageBox.Show("Please Enter a UserName", "ERROR!");
@@ -49,6 +51,7 @@ namespace OOP2CreditUnion
             else
             {
                 currentUser.UserName = txtUsername.Text;
+                //Passing password through SHA1 encryption via PasswordProtect class
                 currentUser.Password = PasswordProtect.Protect(txtPassword.Text);
                 return userMngr.UserLogin(currentUser);
             }

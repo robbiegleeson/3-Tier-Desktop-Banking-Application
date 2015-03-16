@@ -29,26 +29,30 @@ namespace OOP2CreditUnion
             PrimeGrid();
         }
 
+        //Calling method in the account business logic layer to populate data grid.
         private void PrimeGrid()
         {
             AccountBLLManager accountBll = new AccountBLLManager();
             DataSet ds = accountBll.GetDetailsForMainGrid();
+            //Setting the data source for the data grid
             dgvAccounts.DataSource = ds.Tables[0];
         }
 
+        //Method to identify selected field in data grid view which is used to pre-populate contorls within a form.
         private void ViewAccountDetails(int tabIndex)
         {
             DataTable dTable = dgvAccounts.DataSource as DataTable;
             if (dTable != null && dTable.Rows.Count > 0)
             {
                 DataGridViewRow dgvRow = dgvAccounts.CurrentRow;
-
+                //If a selection is made
                 if (dgvRow != null)
                 {
                     int accountNumber = Convert.ToInt32(dgvRow.Cells[Convert.ToInt32(MainGridCloumns.AccountNumber)].Value);
                     int customerID = Convert.ToInt32(dgvRow.Cells[Convert.ToInt32(MainGridCloumns.CustomerID)].Value);
                     using (ViewAccount frmViewAccount = new ViewAccount(accountNumber, customerID, tabIndex))
                     {
+                        //Populate the ViewAccount form with selected values
                         frmViewAccount.ShowDialog();
                     }
                     PrimeGrid();
@@ -62,6 +66,7 @@ namespace OOP2CreditUnion
         {
             using (Login frmLogin = new Login())
             {
+                //Setting control(s) visability depending on login status and access level.
                 frmLogin.ShowDialog();
                 if (frmLogin.loginStatus)
                 {
@@ -102,6 +107,7 @@ namespace OOP2CreditUnion
         {
             using (AddAccount frmAddAccount = new AddAccount())
             {
+                //Open AddAccount form
                 frmAddAccount.ShowDialog();
                 this.Hide();
             }
@@ -119,6 +125,7 @@ namespace OOP2CreditUnion
 
         private void logoutToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+            //On logout, reset control(s) visability depending on login status
             if (MessageBox.Show("Are you sure you wish to logout?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 logoutToolStripMenuItem.Enabled = false;
@@ -147,7 +154,7 @@ namespace OOP2CreditUnion
             ViewAccountDetails(Convert.ToInt32(ViewTabIndex.Deposit));
         }
 
-
+        //Identify selected row value and open pre-populated form, ViewTransactions
         private void viewTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataTable dTable = dgvAccounts.DataSource as DataTable;
@@ -172,6 +179,7 @@ namespace OOP2CreditUnion
             }
         }
 
+        //Identify selected row value and open pre-populated form, EditAccountDetails
         private void editAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataTable dTable = dgvAccounts.DataSource as DataTable;

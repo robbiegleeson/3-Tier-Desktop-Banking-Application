@@ -29,7 +29,7 @@ namespace OOP2CreditUnion
         private void btnAdd_Click(object sender, EventArgs e)
         {
             User newUser = new User();
-
+            //Passing values into Validation class to validate fields
             if (Validation.IsUserNameFormat(txtUsername.Text) && Validation.IsTextFormat(txtFname.Text) && Validation.IsTextFormat(txtLname.Text))
             {
                 newUser.UserName = txtUsername.Text;

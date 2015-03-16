@@ -12,8 +12,10 @@ using BLL;
 
 namespace OOP2CreditUnion
 {
+    //Form to open additional account
     public partial class OpenAccount : Form
     {
+        
         AccountBLLManager accountBLL = new AccountBLLManager();
 
         string CustomerName { get; set; }
@@ -31,6 +33,7 @@ namespace OOP2CreditUnion
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
+            //Validate controls
             if (ValidatedFields())
             {
                 newAccount.Balance = accountBLL.FormatCurrency(txtInitialBalance.Text);
@@ -52,6 +55,7 @@ namespace OOP2CreditUnion
                 MessageBox.Show("Please insure all filled are filled out correctly.", "ERROR!");
         }
 
+        //Bool to Validate controls in form
         public bool ValidatedFields()
         {
             bool validated = true;
@@ -82,6 +86,7 @@ namespace OOP2CreditUnion
             return validated;
         }
 
+        //Clear any validation errors if validation is a success
         public void ClearValidationErrors()
         {
             lblCheckAccountType.Visible = false;

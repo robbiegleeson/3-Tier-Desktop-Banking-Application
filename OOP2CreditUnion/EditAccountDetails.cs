@@ -14,9 +14,10 @@ namespace OOP2CreditUnion
 {
     public partial class EditAccountDetails : Form
     {
+        //Instanciate Business Logic Layers to pass values 
         AccountBLLManager accountBLL = new AccountBLLManager();
         CustomerBLLManager customerBLL = new CustomerBLLManager();
-
+        //Instantiate Account and Customer to create new objects of both
         Account currentAccount;
         Customer currentCust;
 
@@ -35,9 +36,11 @@ namespace OOP2CreditUnion
         {
             if (AccountNumber > 0)
             {
+                //Passing values AccountNumber and CustomerID into BLL to return bool
                 currentAccount = accountBLL.GetAccountDetails(AccountNumber);
                 currentCust = customerBLL.GetCustomerDetails(CustomerID);
 
+                //If both are not null, populate controls with selected values
                 if (currentAccount != null && currentCust != null)
                 {
                     txtFirstName.Text = currentCust.FirstName;
@@ -63,8 +66,10 @@ namespace OOP2CreditUnion
             accountBLL = new AccountBLLManager();
 
             UpdateCustomer = new Customer();
+            //Control validation
             if (ValidateFields())
             {
+                //Capture any changes in controls and pass into Customer object
                 UpdateCustomer.FirstName = txtFirstName.Text;
                 UpdateCustomer.Surname = txtSurname.Text;
                 UpdateCustomer.Email = txtEmail.Text;
@@ -75,6 +80,7 @@ namespace OOP2CreditUnion
                 UpdateCustomer.County = txtCounty.Text;
                 UpdateCustomer.CustomerID = int.Parse(txtCustomerID.Text);
 
+                //Passing values into UpdateCustomer method in the BLL
                 if (customerBLL.UpdateCustomer(UpdateCustomer))
                 {
                     MessageBox.Show("Account Updated", "Success");
@@ -85,9 +91,11 @@ namespace OOP2CreditUnion
                 MessageBox.Show("please ensure all fields are filled out correctly", "Error");
         }
 
+        //Control(s) validation
         bool ValidateFields()
         {
             bool result = true;
+            //If chosen text field is NOT validated, return true....Iterate through rest of validation
             if (!Validation.IsTextFormat(txtFirstName.Text))
             {
                 lblValidateFName.Visible = true;
@@ -139,6 +147,7 @@ namespace OOP2CreditUnion
             else
             {
                 ClearValidationErrors();
+                //return true
                 return true;
             }
         }
