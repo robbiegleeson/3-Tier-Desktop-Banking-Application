@@ -11,11 +11,12 @@ namespace BLL
     public class CustomerBLLManager
     {
         CustomerDALManager customerDAL = new CustomerDALManager();
-
+        //returns an instance of a customer
         public Customer GetCustomerDetails(int customerID)
         {
             return customerDAL.GetCustomerDetails(customerID);
         }
+        //returns (un)successful update of customer info
         public bool UpdateCustomer(Customer updateCustomer)
         {
             return customerDAL.UpdateCustomer(updateCustomer);

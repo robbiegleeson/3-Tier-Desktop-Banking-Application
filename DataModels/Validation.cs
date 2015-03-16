@@ -7,6 +7,9 @@ using System.Text.RegularExpressions;
 
 namespace OOP2CreditUnion
 {
+    //Class for calling validation
+    //Static so does need to be instansiated
+    //in DataModel class library so can be called throughout project
     public static class Validation
     {
         static Regex number = new Regex("[0-9]+");
@@ -18,6 +21,7 @@ namespace OOP2CreditUnion
         static Regex currency = new Regex(@"\d+(\.\d{2})");
         static Match match;
 
+        //methods will return true/false after checking against regex's
         public static bool IsTextFormat(string input)
         {
             match = text.Match(input);

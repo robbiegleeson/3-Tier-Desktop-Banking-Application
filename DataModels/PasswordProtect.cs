@@ -7,8 +7,10 @@ using System.Security.Cryptography;
 
 namespace DataModels
 {
+    
     public static class PasswordProtect
     {
+        //Method takes in string and encrypts it before it's passed to the DB
         public static string Protect(string input)
         {
             SHA1 encrypt = SHA1.Create();

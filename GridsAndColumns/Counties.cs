@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GridsAndColumns
 {
+    //list of counties for the comboBox on AddAccount form
     public enum Counties
     {
         Antrim,

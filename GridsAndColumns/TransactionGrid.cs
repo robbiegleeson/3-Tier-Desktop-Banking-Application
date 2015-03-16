@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GridsAndColumns
 {
+    //Enum for referencing DataGridColumns of the DataGrid for Transactions
     public enum TransactionGrid
     {
         AccountNumber = 0,

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataModels
 {
+    //Class for capturing transaction instances
     public class Transaction
     {
         public int TransactionID { get; set; }

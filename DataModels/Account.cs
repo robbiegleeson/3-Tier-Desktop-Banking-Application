@@ -16,12 +16,15 @@ namespace DataModels
         public int CustomerID { get; set; }
         public int SortCode { get; set; }
 
+        //sortcode is assigned through account constructor, pulled from app.config
         public Account()
         {
             string sortcode = ConfigurationManager.AppSettings["DBSCUsortcode"];
             SortCode = int.Parse(sortcode);
         }
 
+        //DisplayBalance and DisplayODLimit change the amounts from the DB (int) and
+        // coverts it's into a display friendly format
         public string DisplayBalance
         {
             get

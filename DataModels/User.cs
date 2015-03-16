@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataModels
 {
+    //User who accesses the program can be admin or regular depending
+    //on IsAdmin Property
     public class User
     {
         public int UserId { get; set; }

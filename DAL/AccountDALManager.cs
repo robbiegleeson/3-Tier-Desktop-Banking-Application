@@ -13,7 +13,10 @@ namespace DAL
     {
         SqlConnection cxn;
         SqlCommand cmd;
-
+        //The DAL managers contain methods that assign parameters to Procedures Stored
+        //in the Database. each method return relevant infromation - dataSets that binds
+        //to grids, objects and values to be assigned and used and true/false values so
+        //show if information in the DB has been entered/replaced/updated
         public bool CreateAccount(Customer newCustomer, Account newAccount)
         {
             bool userCreated = false, accountCreated = false;
