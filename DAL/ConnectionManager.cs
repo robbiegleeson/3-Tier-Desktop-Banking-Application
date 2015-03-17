@@ -11,7 +11,7 @@ namespace DAL
     //each class that inherits it can access it that
     public abstract class ConnectionManager
     {
-        string connsectionString = ConfigurationManager.ConnectionStrings["DBSCU"].ConnectionString;
+        string connsectionString = ConfigurationManager.ConnectionStrings["DBSCU_Rob_Home"].ConnectionString;
 
         public string ConnectionString
         {

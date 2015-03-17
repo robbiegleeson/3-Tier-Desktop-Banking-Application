@@ -8,23 +8,6 @@ namespace OOP2CreditUnion
 {
     public partial class AddAccount : Form
     {
-
-        private int _AccountID;
-        private int AccountID
-        {
-            get
-            {
-                return _AccountID;
-            }
-            set
-            {
-                if (value > 0)
-                {
-                    _AccountID = value;
-                }
-            }
-        }
-
         public AddAccount()
         {
             InitializeComponent();
